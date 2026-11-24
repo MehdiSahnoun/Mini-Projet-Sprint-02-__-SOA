@@ -4,7 +4,7 @@
 
     @if (err == 1) {
       <div class="alert alert-danger">
-        <strong>login ou mot de passe erronés..</strong>
+        <strong>{{ message }}</strong>
       </div>
     }
 
@@ -38,7 +38,7 @@
       <button type="submit" class="btn btn-primary w-100">Connexion</button>
 
       <div class="text-center mt-3">
-        <a routerLink="/signup">Créer un compte</a>
+        <p>Vous n'avez pas un compte? <a routerLink="/register">S'inscrire</a></p>
       </div>
     </form>
   </div>

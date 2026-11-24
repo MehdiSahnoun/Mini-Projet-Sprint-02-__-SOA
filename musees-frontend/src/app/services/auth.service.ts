@@ -13,6 +13,7 @@ export class AuthService {
   loggedUser!: string;
   isloggedIn: Boolean = false;
   roles!: string[];
+  regitredUser: User = new User();
   private helper = new JwtHelperService();
 
   constructor(
@@ -22,6 +23,22 @@ export class AuthService {
 
   login(user: User) {
     return this.http.post<User>(this.apiURL + '/login', user, { observe: 'response' });
+  }
+
+  registerUser(user: User) {
+    return this.http.post<User>(this.apiURL + '/register', user, { observe: 'response' });
+  }
+
+  validateEmail(code: string) {
+    return this.http.get<User>(this.apiURL + '/verifyEmail/' + code);
+  }
+
+  setRegistredUser(user: User) {
+    this.regitredUser = user;
+  }
+
+  getRegistredUser(): User {
+    return this.regitredUser;
   }
 
   saveToken(jwt: string) {

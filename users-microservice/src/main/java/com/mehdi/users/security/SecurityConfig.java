@@ -42,7 +42,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(requests ->
-                        requests.requestMatchers("/login", "/users/login").permitAll()
+                        requests.requestMatchers("/login", "/users/login", "/register", "/users/register",
+                                        "/verifyEmail", "/users/verifyEmail/**").permitAll()
                                 .requestMatchers("/users/all").hasAuthority("ADMIN")
                                 .anyRequest().authenticated())
                 .addFilterBefore(new JWTAuthenticationFilter(authMgr),
@@ -56,10 +57,12 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("*"));
+        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept"));
         configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

@@ -25,3 +25,16 @@ spring:
 jwt:
   secret: mySecretKey123456789012345678901234567890
   expiration: 86400000
+
+spring.mail:
+  default-encoding: UTF-8
+  host: smtp.gmail.com
+  port: 587
+  username: nadhem.belhadj.abdallah@gmail.com
+  password: ************
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
